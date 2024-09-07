@@ -5,10 +5,10 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-/// @title BaseGrantWinner
+/// @title BaseGrantRecipient
 /// @notice This contract implements a soulbound NFT that cannot be transferred once minted
 /// @dev Extends ERC721, ERC721Burnable, and Ownable
-contract BaseGrantWinner is ERC721, ERC721Burnable, Ownable {
+contract BaseGrantRecipient is ERC721, ERC721Burnable, Ownable {
     uint256 private _tokenIdCounter;
     string private _tokenURI;
 
@@ -61,7 +61,7 @@ contract BaseGrantWinner is ERC721, ERC721Burnable, Ownable {
     /// @dev Can only be called by the token owner
     /// @param tokenId The ID of the token to burn
     function burn(uint256 tokenId) public override {
-        require(ownerOf(tokenId) == _msgSender(), "BaseGrantWinner: caller is not token owner");
+        require(ownerOf(tokenId) == _msgSender(), "BaseGrantRecipient: caller is not token owner");
         super.burn(tokenId);
     }
 
@@ -77,7 +77,7 @@ contract BaseGrantWinner is ERC721, ERC721Burnable, Ownable {
     /// @param tokenId The ID of the token to get the URI for
     /// @return string The token URI
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        require(_exists(tokenId), "BaseGrantWinner: URI query for nonexistent token");
+        require(_exists(tokenId), "BaseGrantRecipient: URI query for nonexistent token");
         return _tokenURI;
     }
 
@@ -89,7 +89,7 @@ contract BaseGrantWinner is ERC721, ERC721Burnable, Ownable {
     /// @return address The address of the previous owner
     function _update(address to, uint256 tokenId, address auth) internal override returns (address) {
         address from = _ownerOf(tokenId);
-        require(from == address(0) || to == address(0), "BaseGrantWinner: token transfer is BLOCKED");
+        require(from == address(0) || to == address(0), "BaseGrantRecipient: token transfer is BLOCKED");
         return super._update(to, tokenId, auth);
     }
 

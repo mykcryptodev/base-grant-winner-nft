@@ -1,24 +1,24 @@
-import {BaseGrantWinner} from "../src/BaseGrantWinner.sol";
+import {BaseGrantRecipient} from "../src/BaseGrantRecipient.sol";
 import {Test} from "forge-std/Test.sol";
 
-contract BaseGrantWinnerTest is Test {
-    BaseGrantWinner public baseGrantWinner;
+contract BaseGrantRecipientTest is Test {
+    BaseGrantRecipient public baseGrantRecipient;
     address public owner;
     address public nonOwner;
 
     function setUp() public {
         owner = address(this);
         nonOwner = makeAddr("non-owner");
-        baseGrantWinner = new BaseGrantWinner("BaseGrantWinner", "BGW", "https://example.com/");
+        baseGrantRecipient = new BaseGrantRecipient("BaseGrantRecipient", "BASEGRANT", "ipfs://QmQFR9MA2eEYaySzjRZX7vEokLTXC5A9UbsEqi3583bkuK");
     }
 
     function testOwner() public {
-        assertEq(address(baseGrantWinner.owner()), address(this));
+        assertEq(address(baseGrantRecipient.owner()), address(this));
     }
 
     function testSetOwner() public {
-        baseGrantWinner.transferOwnership(nonOwner);
-        assertEq(address(baseGrantWinner.owner()), nonOwner);
+        baseGrantRecipient.transferOwnership(nonOwner);
+        assertEq(address(baseGrantRecipient.owner()), nonOwner);
     }
 
     // owner can mint to other addresses
@@ -26,9 +26,9 @@ contract BaseGrantWinnerTest is Test {
         address[] memory to = new address[](2);
         to[0] = makeAddr("to0");
         to[1] = makeAddr("to1");
-        baseGrantWinner.mintBatch(to);
-        assertEq(baseGrantWinner.ownerOf(0), to[0]);
-        assertEq(baseGrantWinner.ownerOf(1), to[1]);
+        baseGrantRecipient.mintBatch(to);
+        assertEq(baseGrantRecipient.ownerOf(0), to[0]);
+        assertEq(baseGrantRecipient.ownerOf(1), to[1]);
     }
 
     // non owner cannot mint
@@ -37,7 +37,7 @@ contract BaseGrantWinnerTest is Test {
         to[0] = makeAddr("to0");
         vm.prank(nonOwner);
         vm.expectRevert();
-        baseGrantWinner.mintBatch(to);
+        baseGrantRecipient.mintBatch(to);
     }
 
     // holders cannot transfer the token
@@ -48,12 +48,12 @@ contract BaseGrantWinnerTest is Test {
         // mint nft to holder
         address[] memory to = new address[](1);
         to[0] = nftHolder;
-        baseGrantWinner.mintBatch(to);
+        baseGrantRecipient.mintBatch(to);
 
         vm.prank(nftHolder);
         vm.expectRevert();
         // simulate the transfer
-        baseGrantWinner.transferFrom(nftHolder, transferRecipient, 0);
+        baseGrantRecipient.transferFrom(nftHolder, transferRecipient, 0);
     }
 
     // holders can burn the token
@@ -63,12 +63,12 @@ contract BaseGrantWinnerTest is Test {
         // mint nft to holder
         address[] memory to = new address[](1);
         to[0] = nftHolder;
-        baseGrantWinner.mintBatch(to);
+        baseGrantRecipient.mintBatch(to);
 
         vm.prank(nftHolder);
-        baseGrantWinner.burn(0);
+        baseGrantRecipient.burn(0);
 
-        (bool success, bytes memory data) = address(baseGrantWinner).staticcall(abi.encodeWithSignature("ownerOf(uint256)", 0));
+        (bool success, bytes memory data) = address(baseGrantRecipient).staticcall(abi.encodeWithSignature("ownerOf(uint256)", 0));
         assertEq(success, false);
     }
 
@@ -77,9 +77,9 @@ contract BaseGrantWinnerTest is Test {
       // mint one nft
       address[] memory to = new address[](1);
       to[0] = makeAddr("to0");
-      baseGrantWinner.mintBatch(to);
+      baseGrantRecipient.mintBatch(to);
       string memory newTokenURI = "https://example.com/new";
-      baseGrantWinner.setTokenURI(newTokenURI);
-      assertEq(baseGrantWinner.tokenURI(0), newTokenURI);
+      baseGrantRecipient.setTokenURI(newTokenURI);
+      assertEq(baseGrantRecipient.tokenURI(0), newTokenURI);
     }
 }
