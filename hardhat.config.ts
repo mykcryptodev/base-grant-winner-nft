@@ -849,7 +849,7 @@ const config: HardhatUserConfig = {
   xdeploy: {
     // Change this name to the name of your main contract
     // Does not necessarily have to match the contract file name
-    contract: "Greeter",
+    contract: "BaseGrantRecipient",
 
     // Change to `undefined` if your constructor does not have any input arguments
     constructorArgsPath: "./deploy-args.ts",

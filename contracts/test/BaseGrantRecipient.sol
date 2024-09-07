@@ -9,7 +9,7 @@ contract BaseGrantRecipientTest is Test {
     function setUp() public {
         owner = address(this);
         nonOwner = makeAddr("non-owner");
-        baseGrantRecipient = new BaseGrantRecipient("BaseGrantRecipient", "BASEGRANT", "ipfs://QmQFR9MA2eEYaySzjRZX7vEokLTXC5A9UbsEqi3583bkuK");
+        baseGrantRecipient = new BaseGrantRecipient("Base Grant Recipient", "BASEGRANT", "ipfs://QmRijCow78NJUpnHUZtbrfEtqitBKXmGqX1j9w2Qdjj97n");
     }
 
     function testOwner() public {

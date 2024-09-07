@@ -9,13 +9,13 @@ function delay(ms: number) {
 }
 
 async function main() {
-  const constructorArgs = ["Hello, Hardhat!"];
-  const contract = await hre.ethers.deployContract("Greeter", constructorArgs);
+  const constructorArgs = ["Base Grant Recipient", "BASEGRANT", "ipfs://QmRijCow78NJUpnHUZtbrfEtqitBKXmGqX1j9w2Qdjj97n"];
+  const contract = await hre.ethers.deployContract("BaseGrantRecipient", constructorArgs);
 
   await contract.waitForDeployment();
   const contractAddress = await contract.getAddress();
 
-  console.log("Greeter deployed to: " + `${GREEN}${contractAddress}${RESET}\n`);
+  console.log("BaseGrantRecipient deployed to: " + `${GREEN}${contractAddress}${RESET}\n`);
 
   console.log(
     "Waiting 30 seconds before beginning the contract verification to allow the block explorer to index the contract...\n",
