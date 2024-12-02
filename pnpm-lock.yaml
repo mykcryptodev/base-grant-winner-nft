@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@eslint/js':
-        specifier: ^9.9.1
-        version: 9.9.1
+        specifier: ^9.16.0
+        version: 9.16.0
       '@matterlabs/hardhat-zksync-deploy':
         specifier: ^1.5.0
         version: 1.5.0(ethers@6.13.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(hardhat@2.22.10(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@22.5.3)(typescript@5.5.4))(typescript@5.5.4)(utf-8-validate@5.0.10))(zksync-ethers@6.12.0(ethers@6.13.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)))
@@ -193,6 +193,10 @@ packages:
 
   '@eslint/eslintrc@3.1.0':
     resolution: {integrity: sha512-4Bfj15dVJdoy3RfZmmo86RK1Fwzn6SstsvK9JS+BaVKqC6QQQQyXekNaC+g+LKNgkQ+2VhGAzm6hO40AhMR3zQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@9.16.0':
+    resolution: {integrity: sha512-tw2HxzQkrbeuvyj1tG2Yqq+0H9wGoI2IMk4EOsQeX+vmd75FtJAzf+gTA69WF+baUKRYQ3x2kbLE08js5OsTVg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/js@9.9.1':
@@ -1894,6 +1898,7 @@ packages:
 
   ethereumjs-abi@0.6.8:
     resolution: {integrity: sha512-Tx0r/iXI6r+lRsdvkFDlut0N08jWMnKRZ6Gkq+Nmw75lZe4e6o3EkSnkaBP5NF6+m5PTGAr9JP43N3LyeoglsA==}
+    deprecated: This library has been deprecated and usage is discouraged.
 
   ethereumjs-util@6.2.1:
     resolution: {integrity: sha512-W2Ktez4L01Vexijrm5EB6w7dg4n/TgpoYU4avuT5T3Vmnw/eCRtiBrJfQYS/DCSvDIOLn2k57GcHdeBcgVxAqw==}
@@ -2024,6 +2029,7 @@ packages:
   follow-redirects@1.15.8:
     resolution: {integrity: sha512-xgrmBhBToVKay1q2Tao5LI26B83UhrB/vM1avwVSDzt8rx3rO6AizBAaF46EgksTVr+rFTQaqZZ9MVBfUe4nig==}
     engines: {node: '>=4.0'}
+    deprecated: Browser detection issues fixed in v1.15.9
     peerDependencies:
       debug: '*'
     peerDependenciesMeta:
@@ -4263,6 +4269,8 @@ snapshots:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+
+  '@eslint/js@9.16.0': {}
 
   '@eslint/js@9.9.1': {}
 
